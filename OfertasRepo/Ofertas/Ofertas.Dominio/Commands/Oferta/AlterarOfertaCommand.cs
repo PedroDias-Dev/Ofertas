@@ -40,7 +40,7 @@ namespace Ofertas.Dominio.Commands.Pacote
         {
             AddNotifications(new Contract()
                 .Requires()
-                .IsNotNullOrEmpty(Titulo, "Titulo", "Informe o Título do pacote!")
+                //.IsNotNullOrEmpty(Titulo, "Titulo", "Informe o Título do pacote!")
                 .IsNotNullOrEmpty(Descricao, "Descricao", "Informe o Descrição do pacote!")
                 .IsNotNullOrEmpty(Imagem, "Imagem", "Informe o Imagem do pacote!")
             );

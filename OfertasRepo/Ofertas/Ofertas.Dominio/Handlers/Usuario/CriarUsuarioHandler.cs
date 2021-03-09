@@ -1,4 +1,5 @@
-﻿using Ofertas.Comum.Commands;
+﻿using Flunt.Notifications;
+using Ofertas.Comum.Commands;
 using Ofertas.Comum.Handlers.Contracts;
 using Ofertas.Comum.Util;
 using Ofertas.Dominio.Commands.Usuario;

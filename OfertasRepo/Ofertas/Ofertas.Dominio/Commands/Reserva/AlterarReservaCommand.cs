@@ -20,7 +20,7 @@ namespace Ofertas.Dominio.Commands.Comentario
         {
             AddNotifications(new Contract()
                 .Requires()
-                .IsNotNullOrEmpty(Texto, "Texto", "Informe o Texto desse comentário!")
+                //.(QuantidadeReserva, "QuantidadeReserva", "Informe a Quantidade!")
             );
         }
     }

@@ -21,14 +21,14 @@ namespace Ofertas.Dominio.Commands.Comentario
         public Guid IdReserva { get; private set; }
         public Guid IdUsuario { get; private set; }
         public Guid IdOferta { get; private set; }
-        public int QuantidadeReserva { get; private set; }
+        public int QuantidadeReserva { get; set; }
         public void Validar()
         {
             AddNotifications(new Contract()
                 .Requires()
-                .IsNotNullOrEmpty(Texto, "Texto", "Informe o Texto do comentário!")
+                //.IsNotNullOrEmpty(QuantidadeReserva.ToString, "QuantidadeReserva", "Informe a quantidade!")
                 .AreNotEquals(IdUsuario, Guid.Empty, "IdUsuario", "Informe o Id do Usuário!")
-                .AreNotEquals(IdPacote, Guid.Empty, "IdPacote", "Informe o Id do Pacote!")
+                .AreNotEquals(IdOferta, Guid.Empty, "IdPacote", "Informe o Id da Reserva!")
             );
         }
     }

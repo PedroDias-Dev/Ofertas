@@ -1,23 +1,29 @@
-﻿using Ofertas.Comum.Entidades;
+﻿using Flunt.Validations;
+using Ofertas.Comum.Entidades;
 using Ofertas.Comum.Enum;
-using Flunt.Br.Extensions;
-using Flunt.Validations;
 using System.Collections.Generic;
 
 namespace Ofertas.Dominio.Entidades
 {
     public class Usuario : Entidade
     {
-        public Usuario(string nome, string email, string senha, string telefone, string cNPJ, string endereco, EnTipoUsuario tipoUsuario, IReadOnlyCollection<Reserva> reservas)
+        public Usuario(string nome, string email, string senha, EnTipoUsuario tipoUsuario)
         {
-            Nome = nome;
-            Email = email;
-            Senha = senha;
-            Telefone = telefone;
-            CNPJ = cNPJ;
-            Endereco = endereco;
-            TipoUsuario = tipoUsuario;
-            Reservas = reservas;
+            AddNotifications(new Contract()
+                .Requires()
+                .HasMinLen(nome, 3, "Nome", "O nome deve ter pelo menos 3 caracteres!")
+                .HasMaxLen(nome, 40, "Nome", "O nome deve ter no máximo 40 caracteres!")
+                .IsEmail(email, "Email", "Informe um e-mail válido!")
+                .HasMinLen(senha, 6, "Senha", "A senha deve ter pelo menos 6 caracteres!")
+            );
+
+            if (Valid)
+            {
+                Nome = nome;
+                Email = email;
+                Senha = senha;
+                TipoUsuario = tipoUsuario;
+            }
         }
 
         public string Nome { get; private set; }

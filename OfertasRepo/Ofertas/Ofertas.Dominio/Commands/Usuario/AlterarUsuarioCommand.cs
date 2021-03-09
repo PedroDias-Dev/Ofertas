@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using Ofertas.Comum.Commands;
+using System;
 
 namespace Ofertas.Dominio.Commands.Usuario
 {

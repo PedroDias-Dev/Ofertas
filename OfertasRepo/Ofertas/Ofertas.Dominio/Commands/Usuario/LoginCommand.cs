@@ -1,4 +1,8 @@
-﻿namespace Ofertas.Dominio.Commands.Usuario
+﻿using Flunt.Notifications;
+using Flunt.Validations;
+using Ofertas.Comum.Commands;
+
+namespace Ofertas.Dominio.Commands.Usuario
 {
     public class LoginCommand : Notifiable, ICommand
     {

@@ -40,7 +40,7 @@ namespace Ofertas.Dominio.Commands.Pacote
         {
             AddNotifications(new Contract()
                 .Requires()
-                .IsNotNullOrEmpty(Titulo, "Titulo", "Informe o Título do pacote! (Package Error)")
+                //.IsNotNullOrEmpty(Titulo, "Titulo", "Informe o Título do pacote! (Package Error)")
                 .IsNotNullOrEmpty(Descricao, "Descricao", "Informe o Descrição do pacote! (Package Error)")
                 .IsNotNullOrEmpty(Imagem, "Imagem", "Informe o Imagem do pacote! (Package Error)")
             );

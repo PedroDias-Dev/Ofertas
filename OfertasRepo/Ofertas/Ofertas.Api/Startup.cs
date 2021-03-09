@@ -10,6 +10,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Ofertas.Dominio.Handlers.Usuarios;
+using Ofertas.Dominio.Repositorios;
 using Ofertas.Infra.Data.Contexts;
 using System;
 using System.Collections.Generic;
@@ -42,7 +44,8 @@ namespace Ofertas.Api
 
             //Conexão
             //TO DO: Gerenciar strings de conexão
-            services.AddDbContext<OfertasContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<OfertasContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=CodeTur;user id=sa;password=sa132")));
+            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=CodeTur;user id=sa;password=sa132"));
 
 
             services.AddSwaggerGen(c =>
@@ -68,9 +71,9 @@ namespace Ofertas.Api
 
             //TO DO: Injeção de Dependência 
             #region Injeção Dependência Usuário
-            //services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
-            //services.AddTransient<CriarUsuarioHandle, CriarUsuarioHandle>();
-            //services.AddTransient<LogarCommandHandle, LogarCommandHandle>();
+            services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddTransient<CriarUsuarioHandler, CriarUsuarioHandle>();
+            services.AddTransient<LoginCommandHandler, LoginCommandHandle>();
             #endregion
 
             #region Injeção Dependência Oferta

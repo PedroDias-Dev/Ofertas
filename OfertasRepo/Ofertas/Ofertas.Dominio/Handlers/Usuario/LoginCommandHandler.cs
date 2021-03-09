@@ -1,4 +1,8 @@
-﻿using Ofertas.Dominio.Repositorios;
+﻿using Ofertas.Comum.Commands;
+using Ofertas.Comum.Handlers.Contracts;
+using Ofertas.Comum.Util;
+using Ofertas.Dominio.Commands.Usuario;
+using Ofertas.Dominio.Repositorios;
 
 namespace Ofertas.Dominio.Handlers.Usuarios
 {

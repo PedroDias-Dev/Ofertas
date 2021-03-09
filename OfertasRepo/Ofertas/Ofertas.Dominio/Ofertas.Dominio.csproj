@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
+    <PackageReference Include="Flunt" Version="1.0.5" />
+    <PackageReference Include="Flunt.Br" Version="1.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Ofertas.Comum\Ofertas.Comum.csproj" />
+    <ProjectReference Include="..\Ofertas.Testes\Ofertas.Testes.csproj" />
   </ItemGroup>
 
 </Project>
