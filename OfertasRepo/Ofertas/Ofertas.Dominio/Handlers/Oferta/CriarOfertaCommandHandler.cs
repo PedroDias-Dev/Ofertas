@@ -1,10 +1,11 @@
 ﻿using Ofertas.Comum.Commands;
 using Ofertas.Comum.Handlers.Contracts;
+using Ofertas.Dominio.Commands.Oferta;
 using Ofertas.Dominio.Commands.Pacote;
 using Ofertas.Dominio.Entidades;
 using Ofertas.Dominio.Repositorios;
 
-namespace Ofertas.Dominio.Handlers.Pacotes
+namespace Ofertas.Dominio.Handlers.Ofertas
 {
     public class CriarOfertaCommandHandler : IHandlerCommand<CriarOfertaCommand>
     {
@@ -22,10 +23,10 @@ namespace Ofertas.Dominio.Handlers.Pacotes
             if (command.Invalid)
                 return new GenericCommandResult(true, "Dados inválidos!", command.Notifications);
 
-            var ofertaexiste = _ofertaRepositorio.BuscarPorTitulo(command.NomeProduto);
+            //var ofertaexiste = _ofertaRepositorio.BuscarPorTitulo(command.NomeProduto);
 
-            if (ofertaexiste != null)
-                return new GenericCommandResult(true, "Titulo da oferta já cadastrado!", null);
+            //if (ofertaexiste != null)
+            //    return new GenericCommandResult(true, "Titulo da oferta já cadastrado!", null);
 
             var oferta = new Oferta(command.NomeProduto, command.Descricao, command.Imagem, command.Ativo, command.IdUsuario, command.Preco, command.PrecoAntigo, command.DataValidade, command.DisponivelDoacao, command.EstoqueTotal, command.Categoria);
 

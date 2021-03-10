@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ofertas.Infra.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class BancoIniciado : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,9 +33,9 @@ namespace Ofertas.Infra.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdOferta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NomeProduto = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Imagem = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeProduto = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
+                    Descricao = table.Column<string>(type: "Text", nullable: false),
+                    Imagem = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
