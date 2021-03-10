@@ -1,3 +1,4 @@
+using CodeTur.Infra.Data.Repositorios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,7 +46,7 @@ namespace Ofertas.Api
             //Conexão
             //TO DO: Gerenciar strings de conexão
             //services.AddDbContext<OfertasContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=CodeTur;user id=sa;password=sa132")));
-            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=CodeTur;user id=sa;password=sa132"));
+            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=Ofertas;user id=sa;password=sa132"));
 
 
             services.AddSwaggerGen(c =>
@@ -72,8 +73,8 @@ namespace Ofertas.Api
             //TO DO: Injeção de Dependência 
             #region Injeção Dependência Usuário
             services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
-            services.AddTransient<CriarUsuarioHandler, CriarUsuarioHandle>();
-            services.AddTransient<LoginCommandHandler, LoginCommandHandle>();
+            services.AddTransient<CriarUsuarioHandler, CriarUsuarioHandler>();
+            services.AddTransient<LoginCommandHandler, LoginCommandHandler>();
             #endregion
 
             #region Injeção Dependência Oferta
