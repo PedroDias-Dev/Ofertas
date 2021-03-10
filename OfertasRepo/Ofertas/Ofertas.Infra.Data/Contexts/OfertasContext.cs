@@ -14,8 +14,7 @@ namespace Ofertas.Infra.Data.Contexts
 
         }
 
-        //TO DO:
-        //Validar Tabelas em conjunto
+        //TO DO: Validar Tabelas em conjunto
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Oferta> Ofertas { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
@@ -25,7 +24,7 @@ namespace Ofertas.Infra.Data.Contexts
         {
             modelBuilder.Ignore<Notification>();
 
-            //TO DO:
+            //TO DO: Mapear Tabela Usuario
             #region Mapeamento Tabela Usuarios
             modelBuilder.Entity<Usuario>().ToTable("Usuarios");
             //Chave Primaria
@@ -53,11 +52,52 @@ namespace Ofertas.Infra.Data.Contexts
             modelBuilder.Entity<Usuario>().Property(u => u.DataAlteracao).HasColumnType("DateTime");
             #endregion
 
-            //TO DO:
+            //TO DO: Mapear Tabela Ofertas
             #region Mapeamento Tabela Ofertas
+            modelBuilder.Entity<Oferta>().ToTable("Ofertas");
+            //Defini como chave primaria
+            modelBuilder.Entity<Oferta>().Property(x => x.Id);
+            //Nome Produto
+            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).HasMaxLength(120);
+            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).HasColumnType("varchar(120)");
+            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).IsRequired();
+            //Descrição
+            modelBuilder.Entity<Oferta>().Property(x => x.Descricao).HasColumnType("Text");
+            modelBuilder.Entity<Oferta>().Property(x => x.Descricao).IsRequired();
+            //Imagem
+            modelBuilder.Entity<Oferta>().Property(x => x.Imagem).HasMaxLength(250);
+            modelBuilder.Entity<Oferta>().Property(x => x.Imagem).HasColumnType("varchar(250)");
+            modelBuilder.Entity<Oferta>().Property(x => x.Imagem).IsRequired();
+            //Ativo
+            modelBuilder.Entity<Oferta>().Property(x => x.Ativo).HasColumnType("bit");
+
+            //Id Empresa
+
+            //Preço
+
+            //Preço Antigo
+
+            //Data de Validade
+
+            //Disponível para Doação
+
+            //Estoque Total
+
+            //Id Categoria
+            
+
+            //Relacionamento
+            //Extra //modelBuilder.Entity<Oferta>().HasMany(c => c.Comentarios).WithOne(e => e.Pacote).HasForeignKey(x => x.IdPacote);
+
+            ////DataCriacao
+            //modelBuilder.Entity<Usuario>().Property(t => t.DataCriacao).HasColumnType("DateTime");
+            //modelBuilder.Entity<Usuario>().Property(t => t.DataCriacao).HasDefaultValueSql("GetDate()");
+            ////DataAlteracao
+            //modelBuilder.Entity<Usuario>().Property(t => t.DataAlteracao).HasColumnType("DateTime");
+            //modelBuilder.Entity<Usuario>().Property(t => t.DataAlteracao).HasDefaultValueSql("GetDate()");
             #endregion
 
-            //TO DO:
+            //TO DO: Mapear Tabela Reservas
             #region Mapeamento Tabela Reservas
             #endregion
 

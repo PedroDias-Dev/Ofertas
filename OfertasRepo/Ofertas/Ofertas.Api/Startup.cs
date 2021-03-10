@@ -11,9 +11,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Ofertas.Dominio.Handlers.Ofertas;
 using Ofertas.Dominio.Handlers.Usuarios;
 using Ofertas.Dominio.Repositorios;
 using Ofertas.Infra.Data.Contexts;
+using Ofertas.Infra.Data.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,8 +47,10 @@ namespace Ofertas.Api
 
             //Conexão
             //TO DO: Gerenciar strings de conexão
-            //services.AddDbContext<OfertasContext>(o => o.UseSqlServer(Configuration.GetConnectionString("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=CodeTur;user id=sa;password=sa132")));
-            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=Ofertas;user id=sa;password=sa132"));
+
+            //services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=Ofertas;user id=sa;password=sa132"));   STRING PEDRO
+            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-DA6MBAT\\SQLEXPRESS;Initial Catalog=Partilhado;user id=sa;password=ps132"));
+
 
 
             services.AddSwaggerGen(c =>
@@ -75,9 +79,12 @@ namespace Ofertas.Api
             services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddTransient<CriarUsuarioHandler, CriarUsuarioHandler>();
             services.AddTransient<LoginCommandHandler, LoginCommandHandler>();
+
             #endregion
 
             #region Injeção Dependência Oferta
+            services.AddTransient<IOfertaRepositorio, OfertaRepositorio>();
+            services.AddTransient<CriarOfertaCommandHandler, CriarOfertaCommandHandler>();
             #endregion
 
             #region Injeção Dependência Reserva

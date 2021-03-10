@@ -4,7 +4,7 @@ using Flunt.Validations;
 using Ofertas.Comum.Enum;
 using System;
 
-namespace Ofertas.Dominio.Commands.Pacote
+namespace Ofertas.Dominio.Commands.Oferta
 {
     public class CriarOfertaCommand : Notifiable, ICommand
     {
@@ -27,7 +27,7 @@ namespace Ofertas.Dominio.Commands.Pacote
         public string Descricao { get; set; }
         public string Imagem { get; private set; }
         public bool Ativo { get; private set; }
-        public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
+        public Guid IdUsuario { get; private set; } //empresa : comerciante ou varejista
         //public virtual Usuario Usuario { get; private set; }
         public string Preco { get; private set; }// em R$ e p/unidade
         public string PrecoAntigo { get; private set; }// em R$ e p/unidade
@@ -40,10 +40,19 @@ namespace Ofertas.Dominio.Commands.Pacote
         {
             AddNotifications(new Contract()
                 .Requires()
-                //.IsNotNullOrEmpty(Titulo, "Titulo", "Informe o Título do pacote! (Package Error)")
-                .IsNotNullOrEmpty(Descricao, "Descricao", "Informe o Descrição do pacote! (Package Error)")
-                .IsNotNullOrEmpty(Imagem, "Imagem", "Informe o Imagem do pacote! (Package Error)")
-            );
+                .IsNotNullOrEmpty(NomeProduto, "Produto", "Informe o nome do produto! (Package Error)")
+                .IsNotNullOrEmpty(Descricao, "Descricao", "Informe o descrição do produto! (Package Error)")
+                .IsNotNullOrEmpty(Imagem, "Imagem", "Informe o imagem do produto! (Package Error)")
+                //.IsNotNullOrEmpty(Ativo.ToString(), "Ativo", "Informe se o produto está disponível para a visualização dos consumidores! (Package Error)")
+                .IsNotNullOrEmpty(Preco, "Preco", "Informe o valor atual do produto! (Package Error)")
+                .IsNotNullOrEmpty(PrecoAntigo, "PrecoAntigo", "Informe o valor antigo do produto! (Package Error)")
+                //.IsNotNullOrEmpty(DataValidade.ToString(), "DataValidade", "Informe o prazo de vencimento do produto! (Package Error)")
+                .IsNotNullOrEmpty(DisponivelDoacao.ToString(), "DisponivelDoacao", "Informe se o produto está disponivel para doação! (Package Error)")
+                .IsNotNullOrEmpty(EstoqueTotal.ToString(), "EstoqueTotal", "Informe a quantidade de produtos existentes em estoque para a oferta! (Package Error)")
+                .IsNotNullOrEmpty(Categoria.ToString(), "Categoria", "Informe a categoria que o produto melhor se encaixa! (Package Error)")
+                
+                
+                );
         }
     }
 }
