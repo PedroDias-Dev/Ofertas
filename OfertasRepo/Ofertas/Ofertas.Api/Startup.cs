@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Ofertas.Dominio.Handlers.Ofertas;
+using Ofertas.Dominio.Handlers.Pacotes;
 using Ofertas.Dominio.Handlers.Usuarios;
 using Ofertas.Dominio.Repositorios;
 using Ofertas.Infra.Data.Contexts;
@@ -81,6 +82,8 @@ namespace Ofertas.Api
             #region Injeção Dependência Oferta
             services.AddTransient<IOfertaRepositorio, OfertaRepositorio>();
             services.AddTransient<CriarOfertaCommandHandler, CriarOfertaCommandHandler>();
+            services.AddTransient<ListarOfertaQueryHandle, ListarOfertaQueryHandle>();
+
             #endregion
 
             #region Injeção Dependência Reserva

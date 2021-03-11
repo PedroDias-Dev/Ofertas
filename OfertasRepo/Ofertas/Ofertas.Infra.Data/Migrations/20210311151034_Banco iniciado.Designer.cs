@@ -10,8 +10,8 @@ using Ofertas.Infra.Data.Contexts;
 namespace Ofertas.Infra.Data.Migrations
 {
     [DbContext(typeof(OfertasContext))]
-    [Migration("20210310045001_Banco Iniciado")]
-    partial class BancoIniciado
+    [Migration("20210311151034_Banco iniciado")]
+    partial class Bancoiniciado
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,13 +34,19 @@ namespace Ofertas.Infra.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataAlteracao")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DateTime")
+                        .HasDefaultValueSql("GetDate()");
 
                     b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DateTime")
+                        .HasDefaultValueSql("GetDate()");
 
                     b.Property<DateTime>("DataValidade")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("Date")
+                        .HasDefaultValueSql("GetDate()");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -52,9 +58,6 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<int>("EstoqueTotal")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdOferta")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
@@ -65,23 +68,18 @@ namespace Ofertas.Infra.Data.Migrations
 
                     b.Property<string>("NomeProduto")
                         .IsRequired()
-                        .HasMaxLength(120)
-                        .HasColumnType("varchar(120)");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Preco")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Preco")
+                        .HasColumnType("float");
 
-                    b.Property<string>("PrecoAntigo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<double>("PrecoAntigo")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Ofertas");
+                    b.ToTable("TipoCategoria");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>
@@ -166,15 +164,6 @@ namespace Ofertas.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("Ofertas.Dominio.Entidades.Oferta", b =>
-                {
-                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>

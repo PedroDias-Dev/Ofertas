@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ofertas.Comum.Enum
 {
-    public enum EnCategoria
+    public enum EnTipoCategoria
     {
         Alimento = 1,
         Vestuário = 2, 

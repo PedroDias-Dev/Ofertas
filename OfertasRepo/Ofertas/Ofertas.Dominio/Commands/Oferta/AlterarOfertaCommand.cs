@@ -8,7 +8,7 @@ namespace Ofertas.Dominio.Commands.Pacote
 {
     public class AlterarOfertaCommand : Notifiable, ICommand
     {
-        public AlterarOfertaCommand(string nomeProduto, string descricao, string imagem, bool ativo, Guid idUsuario, string preco, string precoAntigo, DateTime dataValidade, bool disponivelDoacao, int estoqueTotal, EnCategoria categoria)
+        public AlterarOfertaCommand(string nomeProduto, string descricao, string imagem, bool ativo, Guid idUsuario, float preco, float precoAntigo, DateTime dataValidade, bool disponivelDoacao, int estoqueTotal, EnTipoCategoria categoria)
         {
             NomeProduto = nomeProduto;
             Descricao = descricao;
@@ -29,12 +29,12 @@ namespace Ofertas.Dominio.Commands.Pacote
         public bool Ativo { get; private set; }
         public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
         //public virtual Usuario Usuario { get; private set; }
-        public string Preco { get; private set; }// em R$ e p/unidade
-        public string PrecoAntigo { get; private set; }// em R$ e p/unidade
+        public float Preco { get; private set; }// em R$ e p/unidade
+        public float PrecoAntigo { get; private set; }// em R$ e p/unidade
         public DateTime DataValidade { get; private set; }
         public bool DisponivelDoacao { get; private set; }
         public int EstoqueTotal { get; private set; }
-        public EnCategoria Categoria { get; private set; }
+        public EnTipoCategoria Categoria { get; private set; }
 
         public void Validar()
         {

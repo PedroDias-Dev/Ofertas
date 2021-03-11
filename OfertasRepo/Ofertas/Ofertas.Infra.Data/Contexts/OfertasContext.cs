@@ -58,8 +58,8 @@ namespace Ofertas.Infra.Data.Contexts
             //Defini como chave primaria
             modelBuilder.Entity<Oferta>().Property(x => x.Id);
             //Nome Produto
-            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).HasMaxLength(120);
-            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).HasColumnType("varchar(120)");
+            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).HasMaxLength(50);
+            modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).HasColumnType("varchar(50)");
             modelBuilder.Entity<Oferta>().Property(x => x.NomeProduto).IsRequired();
             //Descrição
             modelBuilder.Entity<Oferta>().Property(x => x.Descricao).HasColumnType("Text");
@@ -70,31 +70,32 @@ namespace Ofertas.Infra.Data.Contexts
             modelBuilder.Entity<Oferta>().Property(x => x.Imagem).IsRequired();
             //Ativo
             modelBuilder.Entity<Oferta>().Property(x => x.Ativo).HasColumnType("bit");
-
-            //Id Empresa
-
+            //IdUsuario - TipoEmpresa
             //Preço
-
+            modelBuilder.Entity<Oferta>().Property(x => x.Preco).HasColumnType("float");
+            modelBuilder.Entity<Oferta>().Property(x => x.Preco).IsRequired();
             //Preço Antigo
-
+            modelBuilder.Entity<Oferta>().Property(x => x.PrecoAntigo).HasColumnType("float");
+            modelBuilder.Entity<Oferta>().Property(x => x.PrecoAntigo).IsRequired();
             //Data de Validade
-
+            modelBuilder.Entity<Oferta>().Property(t => t.DataValidade).HasColumnType("Date");
+            modelBuilder.Entity<Oferta>().Property(t => t.DataValidade).HasDefaultValueSql("GetDate()");
             //Disponível para Doação
-
+            modelBuilder.Entity<Oferta>().Property(x => x.DisponivelDoacao).HasColumnType("bit");
             //Estoque Total
-
-            //Id Categoria
-            
-
+            modelBuilder.Entity<Oferta>().Property(x => x.EstoqueTotal).HasColumnType("int");
+            modelBuilder.Entity<Oferta>().Property(x => x.EstoqueTotal).IsRequired();
+            //Tipo Categoria
+            modelBuilder.Entity<Oferta>().Property(x => x.Categoria).HasColumnType("int");
+            modelBuilder.Entity<Oferta>().Property(x => x.Categoria).IsRequired();
             //Relacionamento
-            //Extra //modelBuilder.Entity<Oferta>().HasMany(c => c.Comentarios).WithOne(e => e.Pacote).HasForeignKey(x => x.IdPacote);
-
+            //Extra //modelBuilder.Entity<Oferta>().HasMany(c => c.Comentarios).WithOne(e => e.Pacote).HasForeignKey(x => x.IdPacote)
             ////DataCriacao
-            //modelBuilder.Entity<Usuario>().Property(t => t.DataCriacao).HasColumnType("DateTime");
-            //modelBuilder.Entity<Usuario>().Property(t => t.DataCriacao).HasDefaultValueSql("GetDate()");
-            ////DataAlteracao
-            //modelBuilder.Entity<Usuario>().Property(t => t.DataAlteracao).HasColumnType("DateTime");
-            //modelBuilder.Entity<Usuario>().Property(t => t.DataAlteracao).HasDefaultValueSql("GetDate()");
+            modelBuilder.Entity<Oferta>().Property(t => t.DataCriacao).HasColumnType("DateTime");
+            modelBuilder.Entity<Oferta>().Property(t => t.DataCriacao).HasDefaultValueSql("GetDate()");
+            //DataAlteracao     
+            modelBuilder.Entity<Oferta>().Property(t => t.DataAlteracao).HasColumnType("DateTime");
+            modelBuilder.Entity<Oferta>().Property(t => t.DataAlteracao).HasDefaultValueSql("GetDate()");
             #endregion
 
             //TO DO: Mapear Tabela Reservas

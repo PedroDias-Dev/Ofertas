@@ -10,17 +10,17 @@ namespace Ofertas.Dominio.Entidades
     public class Oferta : Entidade
     {
 
-        public Oferta(string nomeProduto, string descricao, string imagem, bool ativo, Guid idUsuario, string preco, string precoAntigo, DateTime dataValidade, bool disponivelDoacao, int estoqueTotal, EnCategoria categoria)
+        public Oferta(string nomeProduto, string descricao, string imagem, bool ativo, Guid idUsuario, float preco, float precoAntigo, DateTime dataValidade, bool disponivelDoacao, int estoqueTotal, EnTipoCategoria categoria)
         {
 
             AddNotifications(new Contract()
                 .Requires()
-                .HasMinLen(nomeProduto, 5, "NomeProduto", "O nome deve ter pelo menos 5 caracteres!")
-                .HasMaxLen(nomeProduto, 25, "NomeProduto", "O nome deve ter no máximo 25 caracteres!")
+                .HasMaxLen(nomeProduto, 50, "NomeProduto", "O nome deve ter no máximo 50 caracteres!")
                 .IsNotNullOrEmpty(descricao, "Descricao", "Informe a descrição do produto")
                 .IsNotNullOrEmpty(imagem, "Imagem", "Informe a imagem do produto")
-                .IsNotNullOrEmpty(precoAntigo, "PrecoAntigo", "Informe o valor antigo do produto")
-                .IsNotNullOrEmpty(preco, "Preco", "Informe o valor atual do produto")
+                //.AreNotEquals(IdUsuario, Guid.Empty, "IdUsuario", "Informe o Id do Usuario do tipo Empresa para cadastrar esse produto")
+                .IsNotNullOrEmpty(precoAntigo.ToString(), "PrecoAntigo", "Informe o valor antigo do produto")
+                .IsNotNullOrEmpty(preco.ToString(), "Preco", "Informe o valor atual do produto")
                 .IsNotNullOrEmpty(dataValidade.ToString(), "DataValidade", "Informe a data de vencimento do produto")
                 .IsNotNullOrEmpty(estoqueTotal.ToString(), "EstoqueTotal", "Informe a quantidade de produtos existentes em estoque para a oferta")
             );
@@ -42,19 +42,17 @@ namespace Ofertas.Dominio.Entidades
         }
 
         //props da classe
-        public Guid IdOferta { get; private set; }
         public string NomeProduto { get; private set; }
         public string Descricao { get; private set; }
         public string Imagem { get; private set; }
         public bool Ativo { get; private set; }
         public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
-        public virtual Usuario Usuario { get; private set; }
-        public string Preco { get; private set; }// em R$ e p/unidade
-        public string PrecoAntigo { get; private set; }// em R$ e p/unidade
+        public float Preco { get; private set; }// em R$ e p/unidade
+        public float PrecoAntigo { get; private set; }// em R$ e p/unidade
         public DateTime DataValidade { get; private set; }
         public bool DisponivelDoacao { get; private set; }
         public int EstoqueTotal { get; private set; }
-        public EnCategoria Categoria { get; private set; }
+        public EnTipoCategoria Categoria { get; private set; }
 
         public void AtivarOferta()
         {
