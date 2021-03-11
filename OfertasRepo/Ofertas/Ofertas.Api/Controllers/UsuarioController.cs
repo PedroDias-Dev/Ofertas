@@ -18,7 +18,7 @@ namespace Ofertas.Api.Controllers
     {
         [Route("signup")]
         [HttpPost]
-        public GenericCommandResult SignUp(CriarContaCommand command, [FromServices] CriarUsuarioHandler handler)
+        public GenericCommandResult SignUp([FromBody] CriarContaCommand command, [FromServices] CriarUsuarioHandler handler)
         {
             return (GenericCommandResult)handler.Handle(command);
         }
@@ -26,7 +26,7 @@ namespace Ofertas.Api.Controllers
 
         [Route("signin")]
         [HttpPost]
-        public GenericCommandResult SignIn(LoginCommand command, [FromServices] LoginCommandHandler handler)
+        public GenericCommandResult SignIn([FromBody] LoginCommand command, [FromServices] LoginCommandHandler handler)
         {
             var resultado = (GenericCommandResult)handler.Handle(command);
 
@@ -41,7 +41,7 @@ namespace Ofertas.Api.Controllers
         }
         private string GerarJSONWebToken(Usuario userInfo)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ChaveSecretaOfertasApi"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ChaveSecretaPartilhadoApi"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[] {
@@ -54,8 +54,8 @@ namespace Ofertas.Api.Controllers
 
             var token = new JwtSecurityToken
                 (
-                    "ofertas",
-                    "ofertas",
+                    "partilhado",
+                    "partilhado",
                     claims,
                     expires: DateTime.Now.AddMinutes(120),
                     signingCredentials: credentials

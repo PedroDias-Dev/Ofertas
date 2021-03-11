@@ -23,8 +23,8 @@ namespace Ofertas.Dominio.Commands.Oferta
             Categoria = categoria;
         }
 
-        public string NomeProduto { get; private set; }
-        public string Descricao { get; private set; }
+        public string NomeProduto { get; set; }
+        public string Descricao { get; set; }
         public string Imagem { get; private set; }
         public bool Ativo { get; private set; }
         public Guid IdUsuario { get; private set; } //empresa : comerciante ou varejista
