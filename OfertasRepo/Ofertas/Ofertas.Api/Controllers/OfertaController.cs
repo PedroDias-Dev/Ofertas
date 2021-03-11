@@ -15,26 +15,23 @@ namespace Ofertas.Api.Controllers
     [ApiController]
     public class OfertaController : ControllerBase
     {
+        [Route("add-products")]
         [HttpPost]
         public GenericCommandResult Create(CriarOfertaCommand command,
                                                 [FromServices] CriarOfertaCommandHandler handle)
         {
             return (GenericCommandResult)handle.Handle(command);
         }
+
+        [Route("products")]
+        [HttpGet]
+        public GenericQueryResult GetAll([FromServices] ListarOfertaQueryHandle handle)
+        {
+            ListarOfertaQuery query = new ListarOfertaQuery();
+
+            return (GenericQueryResult)handle.Handle(query);
+
+        }
+
     }
-
-    //[Route("v1/show-offers")]
-    //public GenericQueryResult GetAll([FromServices] ListarOfertaQueryHandle handle)
-    //{
-    //    //verifica nivel de acesso do Usuario
-    //    ListarOfertaQuery query = new ListarOfertaQuery();
-
-    //    var tipoUsuario = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role);
-
-    //    if (tipoUsuario.Value.ToString() == EnTipoUsuario.Comum.ToString())
-    //        query.Ativo = true;
-
-    //    return (GenericQueryResult)handle.Handle(query);
-
-    //}
 }

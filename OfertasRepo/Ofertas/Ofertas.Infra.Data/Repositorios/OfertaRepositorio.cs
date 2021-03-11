@@ -43,7 +43,17 @@ namespace Ofertas.Infra.Data.Repositorios
 
         public IEnumerable<Oferta> Listar(bool? ativo = null)
         {
-            throw new NotImplementedException();
+            if (ativo == null)
+                return _context
+                            .Ofertas
+                            .AsNoTracking()
+                            .OrderBy(x => x.DataCriacao);
+            else
+                return _context
+                            .Ofertas
+                            .AsNoTracking()
+                            .Where(x => x.Ativo == ativo)
+                            .OrderBy(x => x.DataCriacao);
         }
     }
 }
