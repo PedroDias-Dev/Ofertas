@@ -27,6 +27,9 @@ namespace Ofertas.Dominio.Entidades
 
             if (Valid)
             {
+                if (estoqueTotal < 0)
+                    ativo = false;
+
                 NomeProduto = nomeProduto;
                 Descricao = descricao;
                 Imagem = imagem;
@@ -46,13 +49,13 @@ namespace Ofertas.Dominio.Entidades
         public string NomeProduto { get; private set; }
         public string Descricao { get; private set; }
         public string Imagem { get; private set; }
-        public bool Ativo { get; private set; }
+        public bool Ativo { get; set; }
         public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
         public float Preco { get; private set; }// em R$ e p/unidade
         public float PrecoAntigo { get; private set; }// em R$ e p/unidade
         public DateTime DataValidade { get; private set; }
         public bool DisponivelDoacao { get; private set; }
-        public int EstoqueTotal { get; private set; }
+        public int EstoqueTotal { get; set; }
         public EnTipoCategoria Categoria { get; private set; }
 
         public void AtivarOferta()

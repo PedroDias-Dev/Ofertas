@@ -42,10 +42,6 @@ namespace Ofertas.Dominio.Handlers.Reservas
             if (command.QuantidadeReserva > estoqueDisponivel)
                 return new GenericCommandResult(true, "Estoque Insuficiente!", command.Notifications);
 
-            //var reservaDisponivel = _reservaRepositorio.VerificarDisponibilidade(command.QuantidadeReserva, command.IdOferta);
-            //if (reservaDisponivel != null)
-                //return new GenericCommandResult(true, "Estoque Insuficiente", null);
-
             var reserva = new Reserva(command.IdUsuario, command.IdOferta, command.QuantidadeReserva);
 
             if (reserva.Invalid)
@@ -53,8 +49,21 @@ namespace Ofertas.Dominio.Handlers.Reservas
 
             _reservaRepositorio.Adicionar(reserva);
 
-            return new GenericCommandResult(true, "Reserva efetuada!", reserva);
+            //Realiza alteração no Estoque da Oferta
+            oferta.EstoqueTotal = estoqueDisponivel - command.QuantidadeReserva;
+            if (oferta.EstoqueTotal == 0)
+                oferta.Ativo = false;
+
+            _ofertaRepositorio.Alterar(oferta);
+
+
+
+            return new GenericCommandResult(true, "Reserva efetuada!", oferta);
 
         }
     }
 }
+
+//var reservaDisponivel = _reservaRepositorio.VerificarDisponibilidade(command.QuantidadeReserva, command.IdOferta);
+//if (reservaDisponivel != null)
+//return new GenericCommandResult(true, "Estoque Insuficiente", null);

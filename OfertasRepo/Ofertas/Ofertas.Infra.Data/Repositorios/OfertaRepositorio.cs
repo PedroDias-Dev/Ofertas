@@ -25,7 +25,8 @@ namespace Ofertas.Infra.Data.Repositorios
 
         public void Alterar(Oferta oferta)
         {
-            throw new NotImplementedException();
+            _context.Entry(oferta).State = EntityState.Modified;
+            _context.SaveChanges();
         }
 
         public Oferta BuscarPorId(Guid id)
