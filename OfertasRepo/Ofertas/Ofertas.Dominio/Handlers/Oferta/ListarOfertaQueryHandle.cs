@@ -24,6 +24,7 @@ namespace Ofertas.Dominio.Handlers.Pacotes
                 {
                     return new ListarOfertaQueryResult()
                     {
+                        IdOferta = x.Id,
                         NomeProduto = x.NomeProduto,
                         Descricao = x.Descricao,
                         Ativo = x.Ativo,

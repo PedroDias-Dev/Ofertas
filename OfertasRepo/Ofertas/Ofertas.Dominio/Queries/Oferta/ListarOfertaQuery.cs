@@ -15,6 +15,7 @@ namespace Ofertas.Dominio.Queries.Oferta
 
     public class ListarOfertaQueryResult
     {
+        public Guid IdOferta { get; set; }
         public string NomeProduto { get; set; }
         public string Descricao { get; set; }
         public string Imagem { get; set; }

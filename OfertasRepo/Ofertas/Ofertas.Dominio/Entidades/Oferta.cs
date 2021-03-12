@@ -42,6 +42,7 @@ namespace Ofertas.Dominio.Entidades
         }
 
         //props da classe
+        //public Guid IdOferta { get; private set; }
         public string NomeProduto { get; private set; }
         public string Descricao { get; private set; }
         public string Imagem { get; private set; }

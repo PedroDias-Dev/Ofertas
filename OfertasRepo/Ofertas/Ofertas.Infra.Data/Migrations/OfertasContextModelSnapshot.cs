@@ -56,6 +56,9 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<int>("EstoqueTotal")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("IdOferta")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 

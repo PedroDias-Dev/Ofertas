@@ -23,6 +23,9 @@ namespace Ofertas.Dominio.Handlers.Ofertas
             if (command.Invalid)
                 return new GenericCommandResult(true, "Dados inválidos!", command.Notifications);
 
+            if (command.EstoqueTotal < 10)
+                return new GenericCommandResult(true, "A quantidade de estoque deve ser maior que 10!", command.Notifications);
+
             //var ofertaexiste = _ofertaRepositorio.BuscarPorTitulo(command.NomeProduto);
 
             //if (ofertaexiste != null)

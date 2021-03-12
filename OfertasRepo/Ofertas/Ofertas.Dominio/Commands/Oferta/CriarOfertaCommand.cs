@@ -25,15 +25,15 @@ namespace Ofertas.Dominio.Commands.Oferta
 
         public string NomeProduto { get; set; }
         public string Descricao { get; set; }
-        public string Imagem { get; private set; }
-        public bool Ativo { get; private set; }
-        public Guid IdUsuario { get; private set; } //empresa : comerciante ou varejista
-        public float Preco { get; private set; }// em R$ e p/unidade
-        public float PrecoAntigo { get; private set; }// em R$ e p/unidade
-        public DateTime DataValidade { get; private set; }
-        public bool DisponivelDoacao { get; private set; }
-        public int EstoqueTotal { get; private set; }
-        public EnTipoCategoria Categoria { get; private set; }
+        public string Imagem { get; set; }
+        public bool Ativo { get; set; }
+        public Guid IdUsuario { get; set; } //empresa : comerciante ou varejista
+        public float Preco { get; set; }// em R$ e p/unidade
+        public float PrecoAntigo { get; set; }// em R$ e p/unidade
+        public DateTime DataValidade { get; set; }
+        public bool DisponivelDoacao { get; set; }
+        public int EstoqueTotal { get; set; }
+        public EnTipoCategoria Categoria { get; set; }
 
         public void Validar()
         {
@@ -48,6 +48,7 @@ namespace Ofertas.Dominio.Commands.Oferta
                 //.IsNotNullOrEmpty(DataValidade.ToString(), "DataValidade", "Informe o prazo de vencimento do produto! (Package Error)")
                 .IsNotNullOrEmpty(DisponivelDoacao.ToString(), "DisponivelDoacao", "Informe se o produto está disponivel para doação! (Package Error)")
                 .IsNotNullOrEmpty(EstoqueTotal.ToString(), "EstoqueTotal", "Informe a quantidade de produtos existentes em estoque para a oferta! (Package Error)")
+                //.IsLowerThan((int)5, "EstoqueTotal", "A Quantidade deve ser maior que 5! (Package Error)")
                 .IsNotNullOrEmpty(Categoria.ToString(), "Categoria", "Informe a categoria que o produto melhor se encaixa! (Package Error)")
                 );
         }

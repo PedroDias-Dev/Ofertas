@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ofertas.Dominio.Commands.Comentario
+namespace Ofertas.Dominio.Commands.Reserva
 {
     public class CriarReservaCommand : Notifiable, ICommand
     {
@@ -18,9 +18,9 @@ namespace Ofertas.Dominio.Commands.Comentario
             QuantidadeReserva = quantidadeReserva;
         }
 
-        public Guid IdReserva { get; private set; }
-        public Guid IdUsuario { get; private set; }
-        public Guid IdOferta { get; private set; }
+        //public Guid IdReserva { get; set; }
+        public Guid IdUsuario { get; set; }
+        public Guid IdOferta { get; set; }
         public int QuantidadeReserva { get; set; }
         public void Validar()
         {
