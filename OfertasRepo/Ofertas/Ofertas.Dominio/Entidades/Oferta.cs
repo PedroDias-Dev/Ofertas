@@ -47,6 +47,7 @@ namespace Ofertas.Dominio.Entidades
         public string Imagem { get; private set; }
         public bool Ativo { get; private set; }
         public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
+        public virtual Usuario Usuario { get; private set; }
         public float Preco { get; private set; }// em R$ e p/unidade
         public float PrecoAntigo { get; private set; }// em R$ e p/unidade
         public DateTime DataValidade { get; private set; }

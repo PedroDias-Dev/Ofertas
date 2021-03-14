@@ -5,9 +5,11 @@ using Ofertas.Comum.Commands;
 using Ofertas.Comum.Enum;
 using Ofertas.Comum.Queries;
 using Ofertas.Dominio.Commands.Oferta;
+using Ofertas.Dominio.Commands.Pacote;
 using Ofertas.Dominio.Handlers.Ofertas;
 using Ofertas.Dominio.Handlers.Pacotes;
 using Ofertas.Dominio.Queries.Oferta;
+using System;
 
 namespace Ofertas.Api.Controllers
 {
@@ -15,7 +17,12 @@ namespace Ofertas.Api.Controllers
     [ApiController]
     public class OfertaController : ControllerBase
     {
-        [Route("add-products")]
+        /// <summary>
+        /// Cadastra uma nova oferta
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="handle"></param>
+        /// <returns></returns>
         [HttpPost]
         public GenericCommandResult Create(CriarOfertaCommand command,
                                                 [FromServices] CriarOfertaCommandHandler handle)
@@ -23,14 +30,39 @@ namespace Ofertas.Api.Controllers
             return (GenericCommandResult)handle.Handle(command);
         }
 
-        [Route("products")]
+        /// <summary>
+        /// Lista todas as ofertas
+        /// </summary>
+        /// <param name="handle"></param>
+        /// <returns></returns>
         [HttpGet]
-        public GenericQueryResult GetAll([FromServices] ListarOfertaQueryHandle handle)
+        public GenericQueryResult GetAll(
+            [FromServices] ListarOfertaQueryHandle handle)
         {
             ListarOfertaQuery query = new ListarOfertaQuery();
 
             return (GenericQueryResult)handle.Handle(query);
 
+        }
+
+        /// <summary>
+        /// Altera as propriedades da oferta
+        /// </summary>
+        /// <param name="id">id da Oferta</param>
+        /// <param name="command"></param>
+        /// <param name="handler"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public GenericCommandResult Update(Guid id,
+           [FromBody] AlterarOfertaCommand command,
+           [FromServices] AlterarOfertaCommandHandler handler)
+        {
+            if (id == Guid.Empty)
+                return new GenericCommandResult(false, "Informe o Id da Oferta", "");
+
+            command.IdOferta = id;
+
+            return (GenericCommandResult)handler.Handle(command);
         }
 
     }
