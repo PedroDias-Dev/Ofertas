@@ -4,7 +4,7 @@ using Ofertas.Dominio.Queries.Reserva;
 using Ofertas.Dominio.Repositorios;
 using System.Linq;
 
-namespace Ofertas.Dominio.Handlers.Comentarios
+namespace Ofertas.Dominio.Handlers.Reservas
 {
     public class ListarReservaQueryHandler : IHandlerQuery<ListarReservasQuery>
     {
@@ -24,7 +24,7 @@ namespace Ofertas.Dominio.Handlers.Comentarios
                 {
                     return new ListarReservasQueryResult()
                     {
-                        IdReserva = x.IdReserva,
+                        IdReserva = x.Id,
                         IdOferta = x.IdOferta,
                         IdUsuario = x.IdUsuario,
                         QuantidadeReserva = x.QuantidadeReserva

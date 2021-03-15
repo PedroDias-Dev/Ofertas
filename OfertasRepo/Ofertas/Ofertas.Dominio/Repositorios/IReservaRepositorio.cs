@@ -13,7 +13,7 @@ namespace Ofertas.Dominio.Repositorios
         void Adicionar(Reserva reserva);
         void Alterar(Reserva reserva);
 
-        Reserva VerificarDisponibilidade(int quantidade);
+        //Reserva VerificarDisponibilidade(int quantidade, Guid idOferta);
 
         IEnumerable<Reserva> Listar();
 

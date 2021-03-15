@@ -10,7 +10,6 @@ namespace Ofertas.Dominio.Entidades
         /// <summary>
         /// Construtor padrão para solicitar reserva do produto
         /// </summary>
-        /// <param name="idReserva">Id da reserva</param>
         /// <param name="idUsuario">Id consumidor interessado</param>
         /// <param name="usuario"></param>
         /// <param name="idOferta">Id da oferta</param>
@@ -23,7 +22,7 @@ namespace Ofertas.Dominio.Entidades
             QuantidadeReserva = quantidadeReserva;
         }
 
-        public Guid IdReserva { get; private set; }
+        //public Guid IdReserva { get; private set; }
         public Guid IdUsuario { get; private set; }
         public virtual Usuario Usuario { get; private set; }
         public Guid IdOferta { get; private set; }

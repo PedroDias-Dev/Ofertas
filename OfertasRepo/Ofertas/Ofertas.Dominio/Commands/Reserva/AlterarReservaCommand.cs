@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ofertas.Dominio.Commands.Comentario
+namespace Ofertas.Dominio.Commands.Reserva
 {
     //TESTE
     public class AlterarReservaCommand : Notifiable, ICommand

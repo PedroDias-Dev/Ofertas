@@ -31,7 +31,7 @@ namespace Ofertas.Infra.Data.Repositorios
 
         public Oferta BuscarPorId(Guid id)
         {
-            return _context.Ofertas.FirstOrDefault(u => u.Id == id);
+            return _context.Ofertas.FirstOrDefault(p => p.Id == id);
         }
 
         public Oferta BuscarPorTitulo(string nomeProduto)
