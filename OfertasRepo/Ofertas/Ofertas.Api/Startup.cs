@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Ofertas.Dominio.Handlers.Oferta;
 using Ofertas.Dominio.Handlers.Ofertas;
 using Ofertas.Dominio.Handlers.Pacotes;
 using Ofertas.Dominio.Handlers.Reservas;
@@ -46,12 +47,12 @@ namespace Ofertas.Api
                 //Remover propriedades nulas
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            
             //Conexão
             //TO DO: Gerenciar strings de conexão
 
-            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=Ofertas;user id=sa;password=sa132"));   //STRING PEDRO
-            //services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-DA6MBAT\\SQLEXPRESS;Initial Catalog=Partilhado;user id=sa;password=ps132"));
+            //services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-AUB5PDB\\SQLEXPRESS;Initial Catalog=Ofertas;user id=sa;password=sa132"));   //STRING PEDRO
+            services.AddDbContext<OfertasContext>(o => o.UseSqlServer("Data Source=DESKTOP-DA6MBAT\\SQLEXPRESS;Initial Catalog=Partilhado;user id=sa;password=ps132"));
 
 
 
@@ -88,6 +89,9 @@ namespace Ofertas.Api
             services.AddTransient<IOfertaRepositorio, OfertaRepositorio>();
             services.AddTransient<CriarOfertaCommandHandler, CriarOfertaCommandHandler>();
             services.AddTransient<ListarOfertaQueryHandle, ListarOfertaQueryHandle>();
+            services.AddTransient<BuscarOfertaPorIdQueryHandler, BuscarOfertaPorIdQueryHandler>();
+            services.AddTransient<AlterarOfertaCommandHandler, AlterarOfertaCommandHandler>();
+            services.AddTransient<AlterarImagemHandler, AlterarImagemHandler>();
 
             #endregion
 

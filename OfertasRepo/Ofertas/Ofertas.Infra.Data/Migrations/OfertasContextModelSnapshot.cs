@@ -56,9 +56,6 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<int>("EstoqueTotal")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdOferta")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
@@ -98,13 +95,7 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<Guid>("IdOferta")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("IdReserva")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IdUsuario")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("OfertaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("QuantidadeReserva")
@@ -114,8 +105,6 @@ namespace Ofertas.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OfertaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -169,17 +158,9 @@ namespace Ofertas.Infra.Data.Migrations
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>
                 {
-                    b.HasOne("Ofertas.Dominio.Entidades.Oferta", "Oferta")
-                        .WithMany()
-                        .HasForeignKey("OfertaId");
-
-                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", null)
                         .WithMany("Reservas")
                         .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Oferta");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Usuario", b =>

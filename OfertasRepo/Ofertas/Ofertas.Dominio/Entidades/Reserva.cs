@@ -24,9 +24,9 @@ namespace Ofertas.Dominio.Entidades
 
         //public Guid IdReserva { get; private set; }
         public Guid IdUsuario { get; private set; }
-        public virtual Usuario Usuario { get; private set; }
+        //public virtual Usuario Usuario { get; private set; }
         public Guid IdOferta { get; private set; }
-        public virtual Oferta Oferta { get; private set; }
+        //public virtual Oferta Oferta { get; private set; }
         public int QuantidadeReserva { get; private set; }
     }
 }

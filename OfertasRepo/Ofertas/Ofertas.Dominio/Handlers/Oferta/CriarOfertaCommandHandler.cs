@@ -31,7 +31,7 @@ namespace Ofertas.Dominio.Handlers.Ofertas
             //if (ofertaexiste != null)
             //    return new GenericCommandResult(true, "Titulo da oferta já cadastrado!", null);
 
-            var oferta = new Oferta(command.NomeProduto, command.Descricao, command.Imagem, command.Ativo, command.IdUsuario, command.Preco, command.PrecoAntigo, command.DataValidade, command.DisponivelDoacao, command.EstoqueTotal, command.Categoria);
+            var oferta = new Entidades.Oferta(command.NomeProduto, command.Descricao, command.Imagem, command.Ativo, command.IdUsuario, command.Preco, command.PrecoAntigo, command.DataValidade, command.DisponivelDoacao, command.EstoqueTotal, command.Categoria);
 
             if (oferta.Invalid)
                 return new GenericCommandResult(true, "Dados inválidos!", oferta.Notifications);

@@ -1,11 +1,12 @@
 ﻿using Ofertas.Comum.Commands;
+using Ofertas.Comum.Handlers.Contracts;
 using Ofertas.Dominio.Commands.Pacote;
 using Ofertas.Dominio.Entidades;
 using Ofertas.Dominio.Repositorios;
 
 namespace Ofertas.Dominio.Handlers.Pacotes
 {
-    public class AlterarOfertaCommandHandler
+    public class AlterarOfertaCommandHandler : IHandlerCommand<AlterarOfertaCommand>
     {
         private readonly IOfertaRepositorio _ofertaRepositorio;
 
@@ -23,13 +24,13 @@ namespace Ofertas.Dominio.Handlers.Pacotes
                 return new GenericCommandResult(true, "Dados inválidos!", command.Notifications);
 
             //verifica se a oferta existe
-            var pacote = _ofertaRepositorio.BuscarPorId(command.IdOferta);
+            var oferta = _ofertaRepositorio.BuscarPorId(command.IdOferta);
 
-            if (pacote == null)
+            if (oferta == null)
                 return new GenericCommandResult(false, "Oferta não encontrada!", null);
 
             //Altera as propriedades da oferta
-            var oferta = new Oferta(command.NomeProduto, command.Descricao, command.Imagem, command.Ativo, command.IdOferta, command.Preco, command.PrecoAntigo, command.DataValidade, command.DisponivelDoacao, command.EstoqueTotal, command.Categoria);
+            oferta.AtualizarOferta(command.NomeProduto, command.Descricao, command.Preco, command.PrecoAntigo, command.DataValidade, command.EstoqueTotal, command.Categoria);
 
             _ofertaRepositorio.Alterar(oferta);
 

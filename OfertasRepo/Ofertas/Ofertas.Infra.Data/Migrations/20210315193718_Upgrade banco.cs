@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ofertas.Infra.Data.Migrations
 {
-    public partial class Bancoiniciado : Migration
+    public partial class Upgradebanco : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TipoCategoria",
+                name: "Ofertas",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -28,7 +28,7 @@ namespace Ofertas.Infra.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoCategoria", x => x.Id);
+                    table.PrimaryKey("PK_Ofertas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,12 +56,10 @@ namespace Ofertas.Infra.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdReserva = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IdOferta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OfertaId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     QuantidadeReserva = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataAlteracao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -69,23 +67,12 @@ namespace Ofertas.Infra.Data.Migrations
                 {
                     table.PrimaryKey("PK_Reservas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservas_TipoCategoria_OfertaId",
-                        column: x => x.OfertaId,
-                        principalTable: "TipoCategoria",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Reservas_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservas_OfertaId",
-                table: "Reservas",
-                column: "OfertaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservas_UsuarioId",
@@ -96,10 +83,10 @@ namespace Ofertas.Infra.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Reservas");
+                name: "Ofertas");
 
             migrationBuilder.DropTable(
-                name: "TipoCategoria");
+                name: "Reservas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

@@ -71,7 +71,7 @@ namespace Ofertas.Infra.Data.Contexts
             //Ativo
             modelBuilder.Entity<Oferta>().Property(x => x.Ativo).HasColumnType("bit");
             //IdUsuario - TipoEmpresa
-            //Preço
+            //Preco
             modelBuilder.Entity<Oferta>().Property(x => x.Preco).HasColumnType("float");
             modelBuilder.Entity<Oferta>().Property(x => x.Preco).IsRequired();
             //Preço Antigo

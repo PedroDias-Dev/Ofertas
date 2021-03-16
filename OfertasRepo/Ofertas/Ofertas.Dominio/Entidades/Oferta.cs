@@ -23,9 +23,11 @@ namespace Ofertas.Dominio.Entidades
                 .IsNotNullOrEmpty(preco.ToString(), "Preco", "Informe o valor atual do produto")
                 .IsNotNullOrEmpty(dataValidade.ToString(), "DataValidade", "Informe a data de vencimento do produto")
                 .IsNotNullOrEmpty(estoqueTotal.ToString(), "EstoqueTotal", "Informe a quantidade de produtos existentes em estoque para a oferta")
+                .IsNotNullOrEmpty(categoria.ToString(), "Categoria", "Informe a categoria que o produto melhor se encaixa")
             );
 
-            if (Valid)
+
+            if (Valid) 
             {
                 if (estoqueTotal < 0)
                     ativo = false;
@@ -45,13 +47,12 @@ namespace Ofertas.Dominio.Entidades
         }
 
         //props da classe
-        //public Guid IdOferta { get; private set; }
         public string NomeProduto { get; private set; }
         public string Descricao { get; private set; }
         public string Imagem { get; private set; }
         public bool Ativo { get; set; }
         public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
-        public virtual Usuario Usuario { get; private set; }
+        //public virtual Usuario Usuario { get; private set; }
         public float Preco { get; private set; }// em R$ e p/unidade
         public float PrecoAntigo { get; private set; }// em R$ e p/unidade
         public DateTime DataValidade { get; private set; }
@@ -79,23 +80,46 @@ namespace Ofertas.Dominio.Entidades
             Ativo = false;
         }
 
-        public void AtualizarOferta(string nomeProduto, string descricao)
+        public void AtualizarOferta(string nomeProduto, string descricao, float preco, float precoAntigo, DateTime dataValidade, int estoqueTotal, EnTipoCategoria categoria)
         {
             AddNotifications(new Contract()
                 .Requires()
                 .IsNotNullOrEmpty(nomeProduto, "NomeProduto", "Informe o nome do produto")
                 .IsNotNullOrEmpty(descricao, "Descricao", "Informe o descrição do produto")
+                .IsNotNullOrEmpty(preco.ToString(), "Preco", "Informe o novo valor do produto")
+                .IsNotNullOrEmpty(precoAntigo.ToString(), "PrecoAntigo", "Informe o antigo valor do produto")
+                .IsNotNullOrEmpty(dataValidade.ToString(), "DataValidade", "Informe a data de vencimento do produto")
+                .IsNotNullOrEmpty(estoqueTotal.ToString(), "EstoqueTotal", "Informe a quantidade de produtos existentes em estoque para a oferta")
+                .IsNotNullOrEmpty(categoria.ToString(), "Categoria", "Informe a categoria que o produto melhor se encaixa")
+
             );
 
             if (Valid)
             {
                 NomeProduto = nomeProduto;
                 Descricao = descricao;
+                Preco = preco;
+                PrecoAntigo = precoAntigo;
+                DataValidade = dataValidade;
+                EstoqueTotal = estoqueTotal;
+                Categoria = categoria;
             }
         }
+
+        public void AtualizarImagem(string imagem)
+        {
+            AddNotifications(new Contract()
+                .Requires()
+                .IsNullOrEmpty(imagem, "Imagem", "Informe a imagem do produto")
+                );
+
+            if (Valid)
+                Imagem = imagem;
+        }
+    }
 
         //TO DO: Inserir mais funções
 
 
-    }
+    
 }
