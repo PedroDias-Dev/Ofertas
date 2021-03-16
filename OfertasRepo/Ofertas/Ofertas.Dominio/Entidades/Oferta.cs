@@ -70,12 +70,12 @@ namespace Ofertas.Dominio.Entidades
         
         public void AtivarDisponivelDoacao()
         {
-            Ativo = true;
+            DisponivelDoacao = true;
         }
 
         public void DesativarDisponivelDoacao()
         {
-            Ativo = false;
+            DisponivelDoacao = false;
         }
 
         public void AtualizarOferta(string nomeProduto, string descricao)

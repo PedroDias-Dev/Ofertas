@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Ofertas.Comum.Commands
 {
@@ -16,5 +17,6 @@ namespace Ofertas.Comum.Commands
         public bool Sucesso { get; set; }
         public string Mensagem { get; set; }
         public Object Data { get; set; }
+
     }
 }

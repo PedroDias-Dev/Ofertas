@@ -23,7 +23,6 @@ namespace Ofertas.Api.Controllers
             return (GenericCommandResult)handler.Handle(command);
         }
 
-
         [Route("signin")]
         [HttpPost]
         public GenericCommandResult SignIn([FromBody] LoginCommand command, [FromServices] LoginCommandHandler handler)

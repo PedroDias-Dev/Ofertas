@@ -88,7 +88,8 @@ namespace Ofertas.Api
             services.AddTransient<IOfertaRepositorio, OfertaRepositorio>();
             services.AddTransient<CriarOfertaCommandHandler, CriarOfertaCommandHandler>();
             services.AddTransient<ListarOfertaQueryHandle, ListarOfertaQueryHandle>();
-
+            services.AddTransient<AlterarStatusAtivoOfertaCommandHandler, AlterarStatusAtivoOfertaCommandHandler>();
+            services.AddTransient<AlterarStatusDoacaoOfertaCommandHandler, AlterarStatusDoacaoOfertaCommandHandler>();
             #endregion
 
             #region Injeção Dependência Reserva

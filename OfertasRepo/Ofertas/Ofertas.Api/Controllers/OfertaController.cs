@@ -23,6 +23,22 @@ namespace Ofertas.Api.Controllers
             return (GenericCommandResult)handle.Handle(command);
         }
 
+        [Route("change-status-donation")]
+        [HttpPost]
+        public GenericCommandResult ChangeStatusDonation(AlterarStatusDoacaoOfertaCommand command,
+                                                [FromServices] AlterarStatusDoacaoOfertaCommandHandler handle)
+        {
+            return (GenericCommandResult)handle.Handle(command);
+        }
+
+        [Route("change-status-active")]
+        [HttpPost]
+        public GenericCommandResult ChangeStatusActive(AlterarStatusAtivoOfertaCommand command,
+                                                [FromServices] AlterarStatusAtivoOfertaCommandHandler handle)
+        {
+            return (GenericCommandResult)handle.Handle(command);
+        }
+
         [Route("products")]
         [HttpGet]
         public GenericQueryResult GetAll([FromServices] ListarOfertaQueryHandle handle)
