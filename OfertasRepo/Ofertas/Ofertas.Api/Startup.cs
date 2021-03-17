@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Ofertas.Dominio.Handlers.Comentarios;
+using Ofertas.Dominio.Handlers.Oferta;
 using Ofertas.Dominio.Handlers.Ofertas;
 using Ofertas.Dominio.Handlers.Pacotes;
 using Ofertas.Dominio.Handlers.Reservas;
@@ -47,7 +48,7 @@ namespace Ofertas.Api
                 //Remover propriedades nulas
                 options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
             });
-
+            
             //Conexão
             //TO DO: Gerenciar strings de conexão
 
@@ -91,7 +92,10 @@ namespace Ofertas.Api
             services.AddTransient<ListarOfertaQueryHandle, ListarOfertaQueryHandle>();
             services.AddTransient<AlterarStatusAtivoOfertaCommandHandler, AlterarStatusAtivoOfertaCommandHandler>();
             services.AddTransient<AlterarStatusDoacaoOfertaCommandHandler, AlterarStatusDoacaoOfertaCommandHandler>();
+            services.AddTransient<BuscarOfertaPorIdQueryHandler, BuscarOfertaPorIdQueryHandler>();
             services.AddTransient<AlterarOfertaCommandHandler, AlterarOfertaCommandHandler>();
+            services.AddTransient<AlterarImagemHandler, AlterarImagemHandler>();
+
             #endregion
 
             #region Injeção Dependência Reserva

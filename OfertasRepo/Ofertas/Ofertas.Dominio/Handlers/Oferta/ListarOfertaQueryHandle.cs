@@ -9,16 +9,16 @@ namespace Ofertas.Dominio.Handlers.Pacotes
 {
     public class ListarOfertaQueryHandle : IHandlerQuery<ListarOfertaQuery>
     {
-        private readonly IOfertaRepositorio _pacoteRepositorio;
+        private readonly IOfertaRepositorio _ofertaRepositorio;
 
-        public ListarOfertaQueryHandle(IOfertaRepositorio pacoteRepositorio)
+        public ListarOfertaQueryHandle(IOfertaRepositorio ofertaRepositorio)
         {
-            _pacoteRepositorio = pacoteRepositorio;
+            _ofertaRepositorio = ofertaRepositorio;
         }
 
         public IQueryResult Handle(ListarOfertaQuery query)
         {
-            var ofertas = _pacoteRepositorio.Listar(query.Ativo);
+            var ofertas = _ofertaRepositorio.Listar(query.Ativo);
 
             var retornoOfertas = ofertas.Select(
                 x =>

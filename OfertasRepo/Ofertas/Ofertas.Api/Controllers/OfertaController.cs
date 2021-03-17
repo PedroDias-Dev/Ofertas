@@ -8,13 +8,12 @@ using Ofertas.Dominio.Commands.Comentario;
 using Ofertas.Dominio.Commands.Oferta;
 using Ofertas.Dominio.Commands.Pacote;
 using Ofertas.Dominio.Handlers.Comentarios;
+using Ofertas.Dominio.Handlers.Oferta;
 using Ofertas.Dominio.Handlers.Ofertas;
 using Ofertas.Dominio.Handlers.Pacotes;
 using Ofertas.Dominio.Queries.Comentarios;
 using Ofertas.Dominio.Queries.Ofertas;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 
 namespace Ofertas.Api.Controllers
 {
@@ -28,6 +27,7 @@ namespace Ofertas.Api.Controllers
         /// <param name="command"></param>
         /// <param name="handle"></param>
         /// <returns></returns>
+        [Route("add-offers")]
         [HttpPost]
         public GenericCommandResult Create(CriarOfertaCommand command,
                                                 [FromServices] CriarOfertaCommandHandler handle)
@@ -35,32 +35,32 @@ namespace Ofertas.Api.Controllers
             return (GenericCommandResult)handle.Handle(command);
         }
 
-        [HttpPost("{id}/comments")]
+        //[HttpPost("{id}/comments")]
         //[Authorize]
-        public GenericCommandResult AddComments(Guid id,
-                                                [FromBody] CriarComentarioCommand command,
-                                                [FromServices] CriarComentarioCommandHandler handler)
-        {
-            if (id == Guid.Empty)
-                return new GenericCommandResult(false, "Id da Oferta não informado", null);
+        //public GenericCommandResult AddComments(Guid id,
+                                                //[FromBody] CriarComentarioCommand command,
+                                                //[FromServices] CriarComentarioCommandHandler handler)
+        //{
+            //if (id == Guid.Empty)
+                //return new GenericCommandResult(false, "Id da Oferta não informado", null);
 
-            command.IdOferta = id;
+            //command.IdOferta = id;
 
             //var idUsuario = HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti);
             //command.IdUsuario = new Guid(idUsuario.Value);
 
-            return (GenericCommandResult)handler.Handle(command);
-        }
+            //return (GenericCommandResult)handler.Handle(command);
+        //}
 
-        [HttpGet("{id}/comments")]
-        public GenericQueryResult GetAllComments(
-            [FromServices] ListarComentariosQueryHandler handle)
-        {
-            ListarComentariosQuery query = new ListarComentariosQuery();
+        //[HttpGet("{id}/comments")]
+        //public GenericQueryResult GetAllComments(
+            //[FromServices] ListarComentariosQueryHandler handle)
+        //{
+            //ListarComentariosQuery query = new ListarComentariosQuery();
 
-            return (GenericQueryResult)handle.Handle(query);
+            //return (GenericQueryResult)handle.Handle(query);
 
-        }
+        //}
 
         [Route("change-status-donation")]
         [HttpPost]
@@ -94,6 +94,20 @@ namespace Ofertas.Api.Controllers
 
         }
 
+        [HttpGet("{id}")]
+        //[Authorize]
+        public GenericCommandResult GetById(Guid id, [FromServices] BuscarOfertaPorIdQueryHandler handle)
+        {
+            BuscarOfertaPorIdQuery query = new BuscarOfertaPorIdQuery();
+
+            //var tipoUsuario = HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role);
+
+            query.IdOferta = id;
+           // query.TipoUsuario = (EnTipoUsuario)Enum.Parse(typeof(EnTipoUsuario), tipoUsuario.Value);
+
+            return (GenericCommandResult)handle.Handle(query);
+        }
+
         /// <summary>
         /// Altera as propriedades da oferta
         /// </summary>
@@ -113,6 +127,28 @@ namespace Ofertas.Api.Controllers
 
             return (GenericCommandResult)handler.Handle(command);
         }
+
+        /// <summary>
+        /// Altera a imagem da Oferta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="command"></param>
+        /// <param name="handler"></param>
+        /// <returns></returns>
+        [HttpPut("{id}/image")]
+        public GenericCommandResult UpdateImage(Guid id,
+            [FromBody] AlterarImagemOfertaCommand command,
+            [FromServices] AlterarImagemHandler handler
+        )
+        {
+            if (id == Guid.Empty)
+                return new GenericCommandResult(false, "Informe o Id da Oferta", "");
+
+            command.IdOferta = id;
+
+            return (GenericCommandResult)handler.Handle(command);
+        }
+
 
     }
 }

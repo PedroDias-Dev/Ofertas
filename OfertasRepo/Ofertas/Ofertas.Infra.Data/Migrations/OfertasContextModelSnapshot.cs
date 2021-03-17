@@ -139,9 +139,6 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("OfertaId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int>("QuantidadeReserva")
                         .HasColumnType("int");
 
@@ -149,8 +146,6 @@ namespace Ofertas.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OfertaId");
 
                     b.HasIndex("UsuarioId");
 
@@ -228,17 +223,9 @@ namespace Ofertas.Infra.Data.Migrations
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>
                 {
-                    b.HasOne("Ofertas.Dominio.Entidades.Oferta", "Oferta")
-                        .WithMany()
-                        .HasForeignKey("OfertaId");
-
-                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", null)
                         .WithMany("Reservas")
                         .HasForeignKey("UsuarioId");
-
-                    b.Navigation("Oferta");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Usuario", b =>
