@@ -30,6 +30,13 @@ namespace Ofertas.Infra.Data.Repositorios
             _context.SaveChanges();
         }
 
+        public IEnumerable<Comentario> BuscarPorId(Guid id)
+        {
+            var idoferta = id.ToString();
+            return _context.Comentarios.Where(p => p.IdOferta.ToString().Contains(id.ToString())).ToList();
+
+        }
+
         public IEnumerable<Comentario> Listar()
         {
             return _context

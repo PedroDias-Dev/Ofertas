@@ -45,6 +45,9 @@ namespace Ofertas.Infra.Data.Contexts
             //Tipo Usuario
             modelBuilder.Entity<Usuario>().Property(x => x.TipoUsuario).HasColumnType("int");
             modelBuilder.Entity<Usuario>().Property(x => x.TipoUsuario).IsRequired();
+            //CNPJ
+            modelBuilder.Entity<Usuario>().Property(x => x.CNPJ).HasMaxLength(14);
+            modelBuilder.Entity<Usuario>().Property(x => x.CNPJ).HasColumnType("varchar(14)");
             //Telefone
             modelBuilder.Entity<Usuario>().Property(x => x.Telefone).HasMaxLength(11);
             modelBuilder.Entity<Usuario>().Property(x => x.Telefone).HasColumnType("varchar(11)");

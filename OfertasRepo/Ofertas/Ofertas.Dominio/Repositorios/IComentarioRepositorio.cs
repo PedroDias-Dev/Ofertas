@@ -13,5 +13,7 @@ namespace Ofertas.Dominio.Repositorios
         void Alterar(Comentario comentario);
         IEnumerable<Comentario> Listar();
 
+        IEnumerable<Comentario> BuscarPorId(Guid id);
+
     }
 }

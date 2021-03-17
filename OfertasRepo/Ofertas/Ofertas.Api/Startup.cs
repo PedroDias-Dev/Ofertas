@@ -108,6 +108,7 @@ namespace Ofertas.Api
             services.AddTransient<IComentarioRepositorio, ComentarioRepositorio>();
             services.AddTransient<CriarComentarioCommandHandler, CriarComentarioCommandHandler>();
             services.AddTransient<ListarComentariosQueryHandler, ListarComentariosQueryHandler>();
+            services.AddTransient<BuscarComentariosPorIdQueryHandler, BuscarComentariosPorIdQueryHandler>();
             #endregion
         }
 

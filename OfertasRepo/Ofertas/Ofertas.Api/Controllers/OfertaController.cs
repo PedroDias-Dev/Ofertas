@@ -35,32 +35,32 @@ namespace Ofertas.Api.Controllers
             return (GenericCommandResult)handle.Handle(command);
         }
 
-        //[HttpPost("{id}/comments")]
+        [HttpPost("{id}/comments")]
         //[Authorize]
-        //public GenericCommandResult AddComments(Guid id,
-                                                //[FromBody] CriarComentarioCommand command,
-                                                //[FromServices] CriarComentarioCommandHandler handler)
-        //{
-            //if (id == Guid.Empty)
-                //return new GenericCommandResult(false, "Id da Oferta não informado", null);
+        public GenericCommandResult AddComments(Guid id,
+                                                [FromBody] CriarComentarioCommand command,
+                                                [FromServices] CriarComentarioCommandHandler handler)
+        {
+            if (id == Guid.Empty)
+                return new GenericCommandResult(false, "Id da Oferta não informado", null);
 
             //command.IdOferta = id;
 
             //var idUsuario = HttpContext.User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Jti);
             //command.IdUsuario = new Guid(idUsuario.Value);
 
-            //return (GenericCommandResult)handler.Handle(command);
-        //}
+            return (GenericCommandResult)handler.Handle(command);
+        }
 
-        //[HttpGet("{id}/comments")]
-        //public GenericQueryResult GetAllComments(
-            //[FromServices] ListarComentariosQueryHandler handle)
-        //{
-            //ListarComentariosQuery query = new ListarComentariosQuery();
+        [HttpGet("{id}/comments")]
+        //[Authorize]
+        public GenericQueryResult GetCommentById(Guid id, [FromServices] BuscarComentariosPorIdQueryHandler handle)
+        {
+            BuscarComentariosPorIdQuery query = new BuscarComentariosPorIdQuery();
+            query.IdOferta = id;
 
-            //return (GenericQueryResult)handle.Handle(query);
-
-        //}
+            return (GenericQueryResult)handle.Handle(query);
+        }
 
         [Route("change-status-donation")]
         [HttpPost]

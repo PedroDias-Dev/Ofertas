@@ -7,7 +7,7 @@ namespace Ofertas.Dominio.Entidades
 {
     public class Usuario : Entidade
     {
-        public Usuario(string nome, string email, string senha, EnTipoUsuario tipoUsuario)
+        public Usuario(string nome, string email, string senha, string telefone, EnTipoUsuario tipoUsuario)
         {
             AddNotifications(new Contract()
                 .Requires()
@@ -23,6 +23,7 @@ namespace Ofertas.Dominio.Entidades
                 Email = email;
                 Senha = senha;
                 TipoUsuario = tipoUsuario;
+                Telefone = telefone;
             }
         }
 
