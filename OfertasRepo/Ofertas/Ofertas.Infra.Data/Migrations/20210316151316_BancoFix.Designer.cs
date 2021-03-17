@@ -10,8 +10,8 @@ using Ofertas.Infra.Data.Contexts;
 namespace Ofertas.Infra.Data.Migrations
 {
     [DbContext(typeof(OfertasContext))]
-    [Migration("20210311151938_Alteração Nome Tabela Ofertas")]
-    partial class AlteraçãoNomeTabelaOfertas
+    [Migration("20210316151316_BancoFix")]
+    partial class BancoFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,7 +77,12 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<double>("PrecoAntigo")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Ofertas");
                 });
@@ -95,9 +100,6 @@ namespace Ofertas.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("IdOferta")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IdReserva")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdUsuario")
@@ -164,6 +166,15 @@ namespace Ofertas.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Oferta", b =>
+                {
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>

@@ -19,6 +19,42 @@ namespace Ofertas.Infra.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Comentario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("IdOferta")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdUsuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("OfertaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OfertaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Comentarios");
+                });
+
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Oferta", b =>
                 {
                     b.Property<Guid>("Id")
@@ -56,9 +92,6 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<int>("EstoqueTotal")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("IdOferta")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("IdUsuario")
                         .HasColumnType("uniqueidentifier");
 
@@ -78,7 +111,12 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<double>("PrecoAntigo")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Ofertas");
                 });
@@ -96,9 +134,6 @@ namespace Ofertas.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("IdOferta")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IdReserva")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdUsuario")
@@ -165,6 +200,30 @@ namespace Ofertas.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Comentario", b =>
+                {
+                    b.HasOne("Ofertas.Dominio.Entidades.Oferta", "Oferta")
+                        .WithMany()
+                        .HasForeignKey("OfertaId");
+
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Oferta");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Oferta", b =>
+                {
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>

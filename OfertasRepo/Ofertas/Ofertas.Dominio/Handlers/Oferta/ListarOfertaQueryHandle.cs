@@ -1,7 +1,8 @@
 ﻿using Ofertas.Comum.Handlers.Contracts;
 using Ofertas.Comum.Queries;
-using Ofertas.Dominio.Queries.Oferta;
+using Ofertas.Dominio.Queries.Ofertas;
 using Ofertas.Dominio.Repositorios;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Ofertas.Dominio.Handlers.Pacotes
@@ -35,7 +36,9 @@ namespace Ofertas.Dominio.Handlers.Pacotes
                         Categoria = x.Categoria,
                         DisponivelDoacao = x.DisponivelDoacao,
                         EstoqueTotal = x.EstoqueTotal,
-                        IdUsuario = x.IdUsuario
+                        IdUsuario = x.IdUsuario,
+                        //QuantidadeComentarios = x.Comentarios.Count,
+                        //Comentarios = x.Comentarios
                     };
                 }
             );

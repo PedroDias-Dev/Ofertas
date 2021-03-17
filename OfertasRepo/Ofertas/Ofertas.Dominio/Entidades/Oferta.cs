@@ -9,7 +9,7 @@ namespace Ofertas.Dominio.Entidades
 {
     public class Oferta : Entidade
     {
-
+        private readonly List<Comentario> _comentarios;
         public Oferta(string nomeProduto, string descricao, string imagem, bool ativo, Guid idUsuario, float preco, float precoAntigo, DateTime dataValidade, bool disponivelDoacao, int estoqueTotal, EnTipoCategoria categoria)
         {
 
@@ -45,18 +45,20 @@ namespace Ofertas.Dominio.Entidades
         }
 
         //props da classe
-        //public Guid IdOferta { get; private set; }
         public string NomeProduto { get; private set; }
         public string Descricao { get; private set; }
         public string Imagem { get; private set; }
         public bool Ativo { get; set; }
         public Guid IdUsuario { get; private set; }//empresa : comerciante ou varejista
+        public virtual Usuario Usuario { get; private set; }
         public float Preco { get; private set; }// em R$ e p/unidade
         public float PrecoAntigo { get; private set; }// em R$ e p/unidade
         public DateTime DataValidade { get; private set; }
         public bool DisponivelDoacao { get; private set; }
         public int EstoqueTotal { get; set; }
         public EnTipoCategoria Categoria { get; private set; }
+        public IReadOnlyCollection<Comentario> Comentarios { get; set; }
+
 
         public void AtivarOferta()
         {

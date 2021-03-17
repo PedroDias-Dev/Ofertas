@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Ofertas.Dominio.Handlers.Comentarios;
 using Ofertas.Dominio.Handlers.Ofertas;
 using Ofertas.Dominio.Handlers.Pacotes;
 using Ofertas.Dominio.Handlers.Reservas;
@@ -90,12 +91,19 @@ namespace Ofertas.Api
             services.AddTransient<ListarOfertaQueryHandle, ListarOfertaQueryHandle>();
             services.AddTransient<AlterarStatusAtivoOfertaCommandHandler, AlterarStatusAtivoOfertaCommandHandler>();
             services.AddTransient<AlterarStatusDoacaoOfertaCommandHandler, AlterarStatusDoacaoOfertaCommandHandler>();
+            services.AddTransient<AlterarOfertaCommandHandler, AlterarOfertaCommandHandler>();
             #endregion
 
             #region Injeção Dependência Reserva
             services.AddTransient<IReservaRepositorio, ReservaRepositorio>();
             services.AddTransient<CriarReservaCommandHandler, CriarReservaCommandHandler>();
             services.AddTransient<ListarReservaQueryHandler, ListarReservaQueryHandler>();
+            #endregion
+
+            #region Injeção Dependência Comentarios
+            services.AddTransient<IComentarioRepositorio, ComentarioRepositorio>();
+            services.AddTransient<CriarComentarioCommandHandler, CriarComentarioCommandHandler>();
+            services.AddTransient<ListarComentariosQueryHandler, ListarComentariosQueryHandler>();
             #endregion
         }
 

@@ -18,7 +18,8 @@ namespace Ofertas.Infra.Data.Contexts
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Oferta> Ofertas { get; set; }
         public DbSet<Reserva> Reservas { get; set; }
-    
+        public DbSet<Comentario> Comentarios { get; internal set; }
+
         //Modelagem de Tabelas
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

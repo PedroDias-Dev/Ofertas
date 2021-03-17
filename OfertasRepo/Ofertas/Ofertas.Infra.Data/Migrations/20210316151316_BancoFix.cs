@@ -3,34 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Ofertas.Infra.Data.Migrations
 {
-    public partial class Bancoiniciado : Migration
+    public partial class BancoFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "TipoCategoria",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    NomeProduto = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
-                    Descricao = table.Column<string>(type: "Text", nullable: false),
-                    Imagem = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
-                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Preco = table.Column<double>(type: "float", nullable: false),
-                    PrecoAntigo = table.Column<double>(type: "float", nullable: false),
-                    DataValidade = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "GetDate()"),
-                    DisponivelDoacao = table.Column<bool>(type: "bit", nullable: false),
-                    EstoqueTotal = table.Column<int>(type: "int", nullable: false),
-                    Categoria = table.Column<int>(type: "int", nullable: false),
-                    DataCriacao = table.Column<DateTime>(type: "DateTime", nullable: false, defaultValueSql: "GetDate()"),
-                    DataAlteracao = table.Column<DateTime>(type: "DateTime", nullable: false, defaultValueSql: "GetDate()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TipoCategoria", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
@@ -52,11 +28,41 @@ namespace Ofertas.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Ofertas",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    NomeProduto = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Descricao = table.Column<string>(type: "Text", nullable: false),
+                    Imagem = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Preco = table.Column<double>(type: "float", nullable: false),
+                    PrecoAntigo = table.Column<double>(type: "float", nullable: false),
+                    DataValidade = table.Column<DateTime>(type: "Date", nullable: false, defaultValueSql: "GetDate()"),
+                    DisponivelDoacao = table.Column<bool>(type: "bit", nullable: false),
+                    EstoqueTotal = table.Column<int>(type: "int", nullable: false),
+                    Categoria = table.Column<int>(type: "int", nullable: false),
+                    DataCriacao = table.Column<DateTime>(type: "DateTime", nullable: false, defaultValueSql: "GetDate()"),
+                    DataAlteracao = table.Column<DateTime>(type: "DateTime", nullable: false, defaultValueSql: "GetDate()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ofertas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ofertas_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reservas",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IdReserva = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IdUsuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IdOferta = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -69,9 +75,9 @@ namespace Ofertas.Infra.Data.Migrations
                 {
                     table.PrimaryKey("PK_Reservas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reservas_TipoCategoria_OfertaId",
+                        name: "FK_Reservas_Ofertas_OfertaId",
                         column: x => x.OfertaId,
-                        principalTable: "TipoCategoria",
+                        principalTable: "Ofertas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -81,6 +87,11 @@ namespace Ofertas.Infra.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ofertas_UsuarioId",
+                table: "Ofertas",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reservas_OfertaId",
@@ -99,7 +110,7 @@ namespace Ofertas.Infra.Data.Migrations
                 name: "Reservas");
 
             migrationBuilder.DropTable(
-                name: "TipoCategoria");
+                name: "Ofertas");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");

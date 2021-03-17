@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Ofertas.Dominio\Ofertas.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

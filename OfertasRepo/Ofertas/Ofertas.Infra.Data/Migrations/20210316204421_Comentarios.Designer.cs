@@ -10,8 +10,8 @@ using Ofertas.Infra.Data.Contexts;
 namespace Ofertas.Infra.Data.Migrations
 {
     [DbContext(typeof(OfertasContext))]
-    [Migration("20210311151034_Banco iniciado")]
-    partial class Bancoiniciado
+    [Migration("20210316204421_Comentarios")]
+    partial class Comentarios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,42 @@ namespace Ofertas.Infra.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Comentario", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DataAlteracao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("IdOferta")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdUsuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("OfertaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OfertaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Comentarios");
+                });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Oferta", b =>
                 {
@@ -77,9 +113,14 @@ namespace Ofertas.Infra.Data.Migrations
                     b.Property<double>("PrecoAntigo")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("UsuarioId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TipoCategoria");
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Ofertas");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>
@@ -95,9 +136,6 @@ namespace Ofertas.Infra.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("IdOferta")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("IdReserva")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdUsuario")
@@ -164,6 +202,30 @@ namespace Ofertas.Infra.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Comentario", b =>
+                {
+                    b.HasOne("Ofertas.Dominio.Entidades.Oferta", "Oferta")
+                        .WithMany()
+                        .HasForeignKey("OfertaId");
+
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Oferta");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Ofertas.Dominio.Entidades.Oferta", b =>
+                {
+                    b.HasOne("Ofertas.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Ofertas.Dominio.Entidades.Reserva", b =>

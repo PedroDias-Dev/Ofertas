@@ -46,9 +46,9 @@ namespace Ofertas.Dominio.Handlers.Usuarios
 
             _usuarioRepositorio.Adicionar(usuario);
 
-            //Sendgrid.SendConfirmationEmailAsync(command.Email, command.Nome);
+            Sendgrid.SendConfirmationEmailAsync(command.Email, command.Nome);
 
-            Sendgrid.SendWelcomeEmailAsync(command.Email, command.Nome);
+            //Sendgrid.SendWelcomeEmailAsync(command.Email, command.Nome);
 
             return new GenericCommandResult(true, "Usuário Criado com sucesso!", usuario);
         }

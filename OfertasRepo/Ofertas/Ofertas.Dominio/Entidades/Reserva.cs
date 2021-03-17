@@ -22,7 +22,6 @@ namespace Ofertas.Dominio.Entidades
             QuantidadeReserva = quantidadeReserva;
         }
 
-        //public Guid IdReserva { get; private set; }
         public Guid IdUsuario { get; private set; }
         public virtual Usuario Usuario { get; private set; }
         public Guid IdOferta { get; private set; }

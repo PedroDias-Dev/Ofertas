@@ -1,8 +1,10 @@
 ﻿using Ofertas.Comum.Enum;
 using Ofertas.Comum.Queries;
+using Ofertas.Dominio.Entidades;
 using System;
+using System.Collections.Generic;
 
-namespace Ofertas.Dominio.Queries.Oferta
+namespace Ofertas.Dominio.Queries.Ofertas
 {
     public class ListarOfertaQuery : IQuery
     {
@@ -27,5 +29,7 @@ namespace Ofertas.Dominio.Queries.Oferta
         public bool DisponivelDoacao { get; set; }
         public int EstoqueTotal { get; set; }
         public EnTipoCategoria Categoria { get; set; }
+        public int QuantidadeComentarios { get; internal set; }
+        public IReadOnlyCollection<Comentario> Comentarios { get; internal set; }
     }
 }

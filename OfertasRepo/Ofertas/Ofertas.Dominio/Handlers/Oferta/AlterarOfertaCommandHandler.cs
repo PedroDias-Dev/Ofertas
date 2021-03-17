@@ -1,5 +1,4 @@
 ﻿using Ofertas.Comum.Commands;
-using Ofertas.Comum.Enum;
 using Ofertas.Dominio.Commands.Pacote;
 using Ofertas.Dominio.Entidades;
 using Ofertas.Dominio.Repositorios;
@@ -17,20 +16,25 @@ namespace Ofertas.Dominio.Handlers.Pacotes
 
         public ICommandResult Handle(AlterarOfertaCommand command)
         {
+            //Fail Test Validation
             command.Validar();
 
             if (command.Invalid)
                 return new GenericCommandResult(true, "Dados inválidos!", command.Notifications);
 
-            //var pacoteexiste = _pacoteRepositorio.BuscarPorId(command.Id);
-            //if (pacoteexiste != null)
-                //return new GenericCommandResult(false, "Este Pacote não existe!", null);
+            //verifica se a oferta existe
+            var pacote = _ofertaRepositorio.BuscarPorId(command.IdOferta);
 
-            var oferta = new Oferta(command.NomeProduto, command.Descricao, command.Imagem, command.Ativo, command.IdUsuario, command.Preco, command.PrecoAntigo, command.DataValidade, command.DisponivelDoacao, command.EstoqueTotal, command.Categoria);
+            if (pacote == null)
+                return new GenericCommandResult(false, "Oferta não encontrada!", null);
+
+            //Altera as propriedades da oferta
+            var oferta = new Oferta(command.NomeProduto, command.Descricao, command.Imagem, command.Ativo, command.IdOferta, command.Preco, command.PrecoAntigo, command.DataValidade, command.DisponivelDoacao, command.EstoqueTotal, command.Categoria);
 
             _ofertaRepositorio.Alterar(oferta);
 
-            return new GenericCommandResult(true, "Oferta Alterada!", oferta);
+            //Msg de Sucesso
+            return new GenericCommandResult(true, "Oferta Alterada com sucesso!", oferta);
         }
     }
 }

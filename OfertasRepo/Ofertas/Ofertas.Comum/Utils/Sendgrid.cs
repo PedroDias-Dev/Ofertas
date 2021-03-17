@@ -21,8 +21,10 @@ namespace Ofertas.Comum.Utils
             var subject = "Confirme seu email!";
             var to = new EmailAddress(Email, Nome);
 
+            string content = "<code> <strong>Clique no botão abaixo para confirmar seu email:</strong> <br><br> <a href=";
+
             var plainTextContent = "Clique no botão abaixo para confirmar seu email:";
-            var htmlContent = "<strong>Clique no botão abaixo para confirmar seu email:</strong> <br><br> <a><button>Clique Aqui</button></a>";
+            var htmlContent = "";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
         }
