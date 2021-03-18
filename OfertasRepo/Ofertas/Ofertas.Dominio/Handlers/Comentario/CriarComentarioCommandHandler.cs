@@ -1,5 +1,6 @@
 ﻿using Ofertas.Comum.Commands;
 using Ofertas.Comum.Handlers.Contracts;
+using Ofertas.Comum.Utils;
 using Ofertas.Dominio.Commands.Comentario;
 using Ofertas.Dominio.Entidades;
 using Ofertas.Dominio.Repositorios;
@@ -26,6 +27,24 @@ namespace Ofertas.Dominio.Handlers.Comentarios
 
             if (command.Invalid)
                 return new GenericCommandResult(true, "Dados inválidos!", command.Notifications);
+
+            //Valida texto, verifica moderação
+            var resultado = new ModeradorConteudo().Moderar(command.Texto);
+
+            if (resultado != null)
+            {
+                var palavras = resultado.Select(
+                    r =>
+                    {
+                        return new
+                        {
+                            palavra = r.Term
+                        };
+                    }
+                ).ToArray();
+
+                return new GenericCommandResult(false, "Este comentário fere nossas politicas", palavras);
+            }
 
             var comentario = new Comentario(command.Texto, command.IdUsuario, command.IdOferta);
 

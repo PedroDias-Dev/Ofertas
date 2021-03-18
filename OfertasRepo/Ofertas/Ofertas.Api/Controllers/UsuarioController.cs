@@ -4,6 +4,7 @@ using Ofertas.Comum.Commands;
 using Ofertas.Dominio.Commands.Usuario;
 using Ofertas.Dominio.Entidades;
 using Ofertas.Dominio.Handlers.Usuarios;
+using Ofertas.Infra.Data.Contexts;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,6 +17,7 @@ namespace Ofertas.Api.Controllers
 {
     public class UsuarioController : Controller
     {
+
         [Route("signup")]
         [HttpPost]
         public GenericCommandResult SignUp([FromBody] CriarContaCommand command, [FromServices] CriarUsuarioHandler handler)
@@ -62,5 +64,7 @@ namespace Ofertas.Api.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
     }
 }

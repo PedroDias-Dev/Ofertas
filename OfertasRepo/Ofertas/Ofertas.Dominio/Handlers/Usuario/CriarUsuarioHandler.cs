@@ -30,7 +30,7 @@ namespace Ofertas.Dominio.Handlers.Usuarios
 
             //var usuarioExiste = _usuarioRepositorio.BuscarPorEmail(command.Email);
             //if (usuarioExiste != null)
-            //    return new GenericCommandResult(false, "E-mail já cadastrado no sistema, informe outro e-mail!", null);
+              //  return new GenericCommandResult(false, "E-mail já cadastrado no sistema, informe outro e-mail!", null);
 
             //Verificação CNPJ ===> Caso não tenha, usuario é de tipo comum
             if (command.CNPJ == null || command.CNPJ == "" || command.CNPJ.Length < 14)
@@ -49,7 +49,7 @@ namespace Ofertas.Dominio.Handlers.Usuarios
 
             //Sendgrid.SendConfirmationEmailAsync(command.Email, command.Nome);
 
-            //Sendgrid.SendWelcomeEmailAsync(command.Email, command.Nome);
+            Sendgrid.SendWelcomeEmailAsync(command.Email, command.Nome);
 
             return new GenericCommandResult(true, "Usuário Criado com sucesso!", usuario);
         }

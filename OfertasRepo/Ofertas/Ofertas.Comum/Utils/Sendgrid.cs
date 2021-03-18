@@ -31,14 +31,14 @@ namespace Ofertas.Comum.Utils
 
         public static async Task SendWelcomeEmailAsync(string Email, string Nome)
         {
-            var apiKey = "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";
+            var apiKey = "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";
 
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("kinjaprod@gmail.com", "Partilhado");
             var subject = "Bem-vindo ao Partilhado!";
             var to = new EmailAddress(Email, Nome);
 
-            var plainTextContent = "and easy to do anywhere, even with C#";
+            var plainTextContent = "Comece a reservar doações e produtos com ";
             var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
