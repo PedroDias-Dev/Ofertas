@@ -1,5 +1,8 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+Nos dias de hoje encontamos produtos que estão vencendo (alimentos, por exemplo) ou sem giro (vestuário, por exemplo) que
+podem acabar sendo desperdiçados ou descartados, não sendo possível obter retorno
+financeiro com o produto adquirido para venda.
+Para isso encontramos uma solução, conectar as duas partes interessadas e assim disponibilizar em massa ofertas a um valor baixo de mercado para consumidores interessados, evitando a queima de estoque, e gerando um melhor caminho para esses produtos.
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
